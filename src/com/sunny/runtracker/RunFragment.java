@@ -14,11 +14,15 @@ public class RunFragment extends Fragment {
 	private Button mStartButton, mStopButton;
 	private TextView mStartedtTextView, mLatitudeTextView, 
 		mLongitudeTextView, mAltitudeTextView, mDurationTextView;
+	
+	private RunManager mRunManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
+		
+		mRunManager = RunManager.get(getActivity());
 	}
 
 	@Override
@@ -33,9 +37,33 @@ public class RunFragment extends Fragment {
 		mDurationTextView = (TextView) view.findViewById(R.id.run_durationTextView);
 		
 		mStartButton = (Button) view.findViewById(R.id.run_startButton);
+		mStartButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mRunManager.startLocationUpdates();
+				updateUI();
+			}
+		});
+		
 		mStopButton = (Button) view.findViewById(R.id.run_stopButton);
+		mStopButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mRunManager.stopLocationUpdates();
+				updateUI();
+			}
+		});
 		
 		return view;
+	}
+
+	private void updateUI() {
+		boolean started = mRunManager.isTrackingRun();
+		
+		mStartButton.setEnabled(!started);
+		mStopButton.setEnabled(started);
 	}
 
 }
