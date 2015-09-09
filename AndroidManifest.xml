@@ -20,7 +20,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".RunActivity"
+            android:name=".RunListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +28,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RunActivity"
+            android:label="@string/app_name" >
+        </activity>
         
         <receiver 
-            android:name=".LocationReceiver"
+            android:name=".TrackingLocationReceiver"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.sunny.runtracker.ACTION_LOCATION" />
