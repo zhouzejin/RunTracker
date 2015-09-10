@@ -88,7 +88,7 @@ public class RunListFragment extends ListFragment {
 		switch (item.getItemId()) {
 		case R.id.menu_item_new_run:
 			Intent intent = new Intent(getActivity(), RunActivity.class);
-			startActivity(intent);
+			startActivityForResult(intent, REQUEST_NEW_RUN);
 			return true;
 
 		default:
